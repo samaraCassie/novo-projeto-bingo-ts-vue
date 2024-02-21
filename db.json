@@ -1,0 +1,19 @@
+{
+    "jogadores": [
+        {
+        "id": 1,
+        "nome": "João",
+        "QntCartelas": 3
+        },
+        {
+        "id": 2,
+        "nome": "Maria",
+        "QntCartelas": 2
+        },
+        {
+        "id": 3,
+        "nome": "Carlos",
+        "QntCartelas": 4
+        }
+    ]
+}  
