@@ -2,29 +2,30 @@
   <v-app class="v-theme--dark roboto">
     <v-main>
       <TelaInicio />
-      <BoxDadosRodada :nomeJogador="nomeJogador" v-if="post"></BoxDadosRodada>/>
-      <!-- <HelloWorld /> -->
+      <BoxDadosRodada></BoxDadosRodada>
+      <!--<HelloWorld /> -->
       <CartelaBingo />
     </v-main>
   </v-app>
 </template>
 
-<script>
-/* import HelloWorld from "./components/HelloWorld.vue"; */
+<script setup>
 import CartelaBingo from "./components/CartelaBingo.vue";
 import TelaInicio from "./components/TelaInicio.vue";
 import BoxDadosRodada from "./components/BoxDadosRodada.vue";
+import axios from "axios";
+import { ref } from "vue";
 
-export default {
-  name: "App",
+const jogadores = ref();
 
-  components: {
-    /*HelloWorld, */
-    CartelaBingo,
-    TelaInicio,
-    BoxDadosRodada,
-  },
-
-  data() {},
-};
+axios
+  .get("jogadores")
+  .then((response) => {
+    console.log(response.data);
+    jogadores.value = response.data;
+    console.log();
+  })
+  .catch((error) => {
+    console.log(error);
+  });
 </script>
