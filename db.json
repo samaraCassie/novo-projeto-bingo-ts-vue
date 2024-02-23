@@ -1,19 +1,89 @@
 {
     "jogadores": [
+        { "id": 1, "nome": "João", "QntCartelas": 2 , "cartelasId":[1, 2]},
+        { "id": 2, "nome": "Maria", "QntCartelas": 1, "cartelasId":[3] },
+        { "id": 3, "nome": "Carlos", "QntCartelas": 1, "cartelasId":[4] }
+    ],
+    "cartelas": [
         {
-        "id": 1,
-        "nome": "João",
-        "QntCartelas": 3
+            "id": 1,
+            "colunas": [
+                "B", "I", "N", "G", "O"
+            ],
+            "desserts": [
+            { "B": 0, "I": 0, "N": 0, "G": 0, "O": 0 },
+            { "B": 0, "I": 0, "N": 0, "G": 0, "O": 0 },
+            { "B": 0, "I": 0, "N": 0, "G": 0, "O": 0 },
+            { "B": 0, "I": 0, "N": 0, "G": 0, "O": 0 },
+            { "B": 0, "I": 0, "N": 0, "G": 0, "O": 0 }
+            ],
+            "blocosMarcados": [
+            { "B": false, "I": false, "N": false, "G": false, "O": false },
+            { "B": false, "I": false, "N": false, "G": false, "O": false },
+            { "B": false, "I": false, "N": false, "G": false, "O": false },
+            { "B": false, "I": false, "N": false, "G": false, "O": false },
+            { "B": false, "I": false, "N": false, "G": false, "O": false }
+            ]
         },
         {
-        "id": 2,
-        "nome": "Maria",
-        "QntCartelas": 2
+            "id": 2,
+            "colunas": [
+                "B", "I", "N", "G", "O"
+            ],
+            "desserts": [
+            { "B": 0, "I": 0, "N": 0, "G": 0, "O": 0 },
+            { "B": 0, "I": 0, "N": 0, "G": 0, "O": 0 },
+            { "B": 0, "I": 0, "N": 0, "G": 0, "O": 0 },
+            { "B": 0, "I": 0, "N": 0, "G": 0, "O": 0 },
+            { "B": 0, "I": 0, "N": 0, "G": 0, "O": 0 }
+            ],
+            "blocosMarcados": [
+            { "B": false, "I": false, "N": false, "G": false, "O": false },
+            { "B": false, "I": false, "N": false, "G": false, "O": false },
+            { "B": false, "I": false, "N": false, "G": false, "O": false },
+            { "B": false, "I": false, "N": false, "G": false, "O": false },
+            { "B": false, "I": false, "N": false, "G": false, "O": false }
+            ]
         },
         {
-        "id": 3,
-        "nome": "Carlos",
-        "QntCartelas": 4
+            "id": 3,
+            "colunas": [
+                "B", "I", "N", "G", "O"
+            ],
+            "desserts": [ 
+                { "B": 3, "I": 3, "N": 3, "G": 3, "O": 3 },
+                { "B": 3, "I": 3, "N": 3, "G": 3, "O": 3 },
+                { "B": 3, "I": 3, "N": 3, "G": 3, "O": 3 },
+                { "B": 3, "I": 3, "N": 3, "G": 3, "O": 3 },
+                { "B": 3, "I": 3, "N": 3, "G": 3, "O": 3 } 
+            ],
+            "blocosMarcados": [
+            { "B": false, "I": false, "N": false, "G": false, "O": false },
+            { "B": false, "I": false, "N": false, "G": false, "O": false },
+            { "B": false, "I": false, "N": false, "G": false, "O": false },
+            { "B": false, "I": false, "N": false, "G": false, "O": false },
+            { "B": false, "I": false, "N": false, "G": false, "O": false }
+            ]
+        },
+        {
+            "id": 4,
+            "colunas": [
+                "B", "I", "N", "G", "O"
+            ],
+            "desserts": [
+                { "B": 4, "I": 4, "N": 4, "G": 4, "O": 4 },
+                { "B": 4, "I": 4, "N": 4, "G": 4, "O": 4 },
+                { "B": 4, "I": 4, "N": 4, "G": 4, "O": 4 },
+                { "B": 4, "I": 4, "N": 4, "G": 4, "O": 4 },
+                { "B": 4, "I": 4, "N": 4, "G": 4, "O": 4 }
+            ],
+            "blocosMarcados": [
+            { "B": false, "I": false, "N": false, "G": false, "O": false },
+            { "B": false, "I": false, "N": false, "G": false, "O": false },
+            { "B": false, "I": false, "N": false, "G": false, "O": false },
+            { "B": false, "I": false, "N": false, "G": false, "O": false },
+            { "B": false, "I": false, "N": false, "G": false, "O": false }
+            ]
         }
     ]
 }  

@@ -2,169 +2,92 @@
   <v-container class="v-theme--dark">
     <v-row class="text-center ma-0">
       <v-col cols="12" class="align-center justify-center ma-0">
-        <div>
-          <v-card
-            class="my-5 v-theme--dark v-card--density-comfortable elevation-10 rounded"
-          >
-            <v-row w class="ma-1">
-              <v-col>
-                <v-card-title>{{ nomeJogador }}</v-card-title>
-                <v-card-subtitle> Cartela 1 </v-card-subtitle>
-              </v-col>
-            </v-row>
-            <v-row class="mr-10 ml-10 mb-10">
-              <v-col cols="12" class="align-center">
-                <v-table class="v-theme--dark">
-                  <thead>
-                    <tr>
-                      <th
-                        class="text-center"
-                        v-for="coluna in colunas"
-                        :key="coluna"
-                      >
-                        <v-col>{{ coluna }}</v-col>
-                      </th>
-                    </tr>
-                  </thead>
-                  <tbody class="">
-                    <tr v-for="(item, index) in desserts" :key="index">
-                      <td v-for="(numero, key) in item" :key="key">
-                        <button
-                          class="quadrado Coluna{{key}}"
-                          @click="marcarBloco(index, key)"
-                        >
-                          <label>{{ numero }}</label>
-                          <MarcadorBloco
-                            :mostrar="blocosMarcados[index + key]"
-                            @marcar-bloco="marcarBloco"
-                          />
-                        </button>
-                      </td>
-                    </tr>
-                  </tbody>
-                </v-table>
-              </v-col>
-            </v-row>
-          </v-card>
+        <h2>Cartela de Bingo</h2>
+        <div v-for="(jogador, index) in jogadores" :key="index">
+          <p>{{ jogador.nome }} : {{ jogador.cartelasId }}</p>
+          <div v-for="(cartelaId, index) in jogador.cartelasId" :key="index">
+            <div v-for="(cartela, index) in cartelas" :key="index">
+              <div v-if="cartela.id == cartelaId">
+                <v-card
+                  class="my-5 v-theme--dark v-card--density-comfortable elevation-10 rounded"
+                >
+                  <v-row>
+                    <v-col>
+                      <v-row>
+                        <v-col>
+                          <v-card-title
+                            >{{ jogador.nome }} {{ cartela.id }}</v-card-title
+                          >
+                        </v-col>
+                      </v-row>
+                      <v-row class="mr-10 ml-10 mb-10">
+                        <v-col cols="12" class="align-center">
+                          <v-table class="v-theme--dark">
+                            <thead>
+                              <tr>
+                                <th
+                                  class="text-center"
+                                  v-for="coluna in cartela.colunas"
+                                  :key="coluna"
+                                >
+                                  <v-col>{{ coluna }}</v-col>
+                                </th>
+                              </tr>
+                            </thead>
+                            <tbody>
+                              <tr
+                                v-for="(item, index) in cartela.desserts"
+                                :key="index"
+                              >
+                                <td v-for="(numero, key) in item" :key="key">
+                                  <label>{{ numero }}</label>
+                                </td>
+                              </tr>
+                            </tbody>
+                          </v-table>
+                        </v-col>
+                      </v-row>
+                    </v-col>
+                  </v-row>
+                </v-card>
+              </div>
+            </div>
+          </div>
         </div>
       </v-col>
     </v-row>
   </v-container>
 </template>
 
-<script>
-import MarcadorBloco from "./MarcadorBloco.vue";
+<script setup>
+import axios from "axios";
+import { ref } from "vue";
 
-export default {
-  name: "CartelaBingo",
-  data() {
-    return {
-      colunas: ["B", "I", "N", "G", "O"],
-      desserts: [
-        { B: 0, I: 0, N: 0, G: 0, O: 0 },
-        { B: 0, I: 0, N: 0, G: 0, O: 0 },
-        { B: 0, I: 0, N: 0, G: 0, O: 0 },
-        { B: 0, I: 0, N: 0, G: 0, O: 0 },
-        { B: 0, I: 0, N: 0, G: 0, O: 0 },
-      ],
-      blocosMarcados: [
-        { B: false, I: false, N: false, G: false, O: false },
-        { B: false, I: false, N: false, G: false, O: false },
-        { B: false, I: false, N: false, G: false, O: false },
-        { B: false, I: false, N: false, G: false, O: false },
-        { B: false, I: false, N: false, G: false, O: false },
-      ],
-    };
-  },
-  props: {
-    nomeJogador: String,
-  },
-  mounted() {
-    this.inicializarDesserts();
-  },
-  methods: {
-    sorteio(min, max) {
-      return Math.floor(Math.random() * (max - min + 1) + min);
-    },
-    numerosUnicos(quantidade, min, max) {
-      const numerosUnicos = new Set();
-      while (numerosUnicos.size < quantidade) {
-        const numeroSorteado = this.sorteio(min, max);
-        numerosUnicos.add(numeroSorteado);
-      }
-      return Array.from(numerosUnicos);
-    },
-    inicializarDesserts() {
-      const quantidade = 1;
-      let min = 1;
-      let max = 15;
+const jogadores = ref();
 
-      for (let i = 0; i < this.desserts.length; i++) {
-        for (let coluna in this.desserts[i]) {
-          const listaNumerosSorteados = this.numerosUnicos(
-            quantidade,
-            min,
-            max
-          );
+axios
+  .get("jogadores")
+  .then((response) => {
+    console.log(response.data);
+    jogadores.value = response.data;
+    console.log();
+  })
+  .catch((error) => {
+    console.log(error);
+  });
 
-          this.desserts[i][coluna] = "";
+const cartelas = ref();
 
-          for (let j = 0; j < listaNumerosSorteados.length; j++) {
-            if (this.desserts[i][coluna] !== "") {
-              this.desserts[i][coluna] += " / " + listaNumerosSorteados[j];
-            } else {
-              this.desserts[i][coluna] = listaNumerosSorteados[j];
-            }
-          }
-
-          min += 15;
-          max += 15;
-        }
-      }
-      console.log(this.desserts);
-    },
-    inicializarBlocosMarcados() {
-      this.blocosMarcados = this.colunas.map((coluna) => {
-        return this.colunas.reduce((acc, curr) => {
-          acc[curr] = false; // Inicialize com valores booleanos padrão (false)
-          console.log("coluna " + coluna);
-          return acc;
-        }, {});
-      });
-    },
-    marcarBloco(index, key) {
-      console.log("teste");
-      /* this.blocosMarcados[key][index] = !this.blocosMarcados[key][index];*/
-      console.log(`Bloco Marcado: `);
-      console.log(`this.blocosMarcados` + this.blocosMarcados);
-      console.log(`key` + key);
-      console.log(`Index` + index);
-      console.log(
-        `this.blocosMarcados[index][key]` + this.blocosMarcados[index][key]
-      );
-    },
-
-    /* desmarcarBloco(blocosMarcados, numero) {
-      console.log("AEEEE");
-      this.blocosMarcados.fill(blocosMarcados, numero, true); // Atualize o estado para redefinir a marcação
-      console.log(`Bloco Dessmarcadoo: ` + blocosMarcados + numero);
-    }, */
-    ToggleMarcar(blocosMarcados, numero) {
-      console.log("TESTE");
-      if ((blocosMarcados, numero)) {
-        this.marcarBloco(blocosMarcados, numero);
-      } else {
-        this.desmarcarBloco(blocosMarcados, numero);
-      }
-    },
-    Teste() {
-      console.log("Teste");
-    },
-  },
-  components: {
-    MarcadorBloco,
-  },
-};
+axios
+  .get("cartelas")
+  .then((response) => {
+    console.log(response.data);
+    cartelas.value = response.data;
+    console.log();
+  })
+  .catch((error) => {
+    console.log(error);
+  });
 </script>
 
 <style>
