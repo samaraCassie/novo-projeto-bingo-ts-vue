@@ -4,6 +4,7 @@
       <TelaInicio />
       <BoxDadosRodada></BoxDadosRodada>
       <CartelaBingo></CartelaBingo>
+      <CartelaBingo />
     </v-main>
   </v-app>
 </template>
